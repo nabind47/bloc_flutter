@@ -11,3 +11,5 @@ flutter create --platforms android,ios bloc_flutter
 2. -- Loading --
 3. Mapping
 4. Emit a state -> Update the UI
+
+> Event -> Bloc -> State

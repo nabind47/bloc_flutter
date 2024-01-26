@@ -1,3 +1,5 @@
+![bloc](images/f_arch.png)
+
 ```sh
 flutter create --platforms android,ios bloc_flutter
 ```

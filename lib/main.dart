@@ -14,19 +14,23 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (_) => CounterBloc(),
-      child: BlocProvider(
-        create: (context) => SwitchBloc(),
-        child: MaterialApp(
-          title: 'Flutter Bloc',
-          debugShowCheckedModeBanner: false,
-          theme: ThemeData(
-            colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-            useMaterial3: true,
-          ),
-          home: const SwitchScreen(),
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(
+          create: (_) => CounterBloc(),
         ),
+        BlocProvider(
+          create: (_) => SwitchBloc(),
+        ),
+      ],
+      child: MaterialApp(
+        title: 'Flutter Bloc',
+        debugShowCheckedModeBanner: false,
+        theme: ThemeData(
+          colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+          useMaterial3: true,
+        ),
+        home: const SwitchScreen(),
       ),
     );
   }

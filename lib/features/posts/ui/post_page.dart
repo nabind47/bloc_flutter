@@ -59,6 +59,12 @@ class _PostPageState extends State<PostPage> {
           return Container();
         },
       ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          postsBloc.add(PostAddEvent());
+        },
+        child: const Icon(Icons.add),
+      ),
     );
   }
 }

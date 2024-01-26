@@ -14,3 +14,7 @@ class PostsFetchingSuccessfulState extends PostsState {
 
   PostsFetchingSuccessfulState({required this.posts});
 }
+
+class PostsAdditonSuccessState extends PostsActionState {}
+
+class PostsAdditonErrorState extends PostsActionState {}

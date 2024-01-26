@@ -26,12 +26,95 @@ class MyApp extends StatelessWidget {
 
 ```dart
 BlocBuilder<SwitchBloc, SwitchStates>(
-    builder: (context, state) {
-        return Switch(
-            value: state.isSwitch,
-            onChanged: (newValue) {
-                context.read<SwitchBloc>().add(EnableOrDisableNotification());
-            });
-    },
+  builder: (context, state) {
+    return Switch(
+      value: state.isSwitch,
+      onChanged: (newValue) {
+        context
+          .read<SwitchBloc>()
+          .add(EnableOrDisableNotification());
+      });
+  },
+)
+```
+
+```dart
+class SwitchBloc extends Bloc<SwitchEvents, SwitchStates> {
+  SwitchBloc() : super(SwitchStates()) {
+    on<EnableOrDisableNotification>(_enableOrDisableNotification);
+    on<SliderEvent>(_slider);
+  }
+
+  void _enableOrDisableNotification(
+      EnableOrDisableNotification event, Emitter<SwitchStates> emit) {
+    emit(state.copyWith(isSwitch: !state.isSwitch));
+  }
+
+  void _slider(SliderEvent event, Emitter<SwitchStates> emit) {
+    emit(state.copyWith(slider: event.slider));
+  }
+}
+```
+
+> `event.slider`
+
+```dart
+import 'package:equatable/equatable.dart';
+
+class SwitchStates extends Equatable {
+  bool isSwitch;
+  double slider;
+
+  SwitchStates({this.isSwitch = false, this.slider = .4});
+
+  SwitchStates copyWith({bool? isSwitch, double? slider}) {
+    return SwitchStates(
+        isSwitch: isSwitch ?? this.isSwitch, slider: slider ?? this.slider);
+  }
+
+  @override
+  List<Object?> get props => [isSwitch, slider];
+}
+```
+
+```dart
+import 'package:bloc_flutter/bloc/switch/switch.states.dart';
+import 'package:bloc_flutter/bloc/switch/switch_event.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+
+class SwitchBloc extends Bloc<SwitchEvents, SwitchStates> {
+  SwitchBloc() : super(SwitchStates()) {
+    on<EnableOrDisableNotification>(_enableOrDisableNotification);
+    on<SliderEvent>(_slider);
+  }
+
+  void _enableOrDisableNotification(
+      EnableOrDisableNotification event, Emitter<SwitchStates> emit) {
+    emit(state.copyWith(isSwitch: !state.isSwitch));
+  }
+
+  void _slider(SliderEvent event, Emitter<SwitchStates> emit) {
+    emit(state.copyWith(slider: event.slider));
+  }
+}
+```
+
+```dart
+BlocBuilder<SwitchBloc, SwitchStates>(
+  builder: (context, state) {
+    return Container(height: 200,color: Colors.red.withOpacity(state.slider));
+  },),
+
+BlocBuilder<SwitchBloc, SwitchStates>(
+  builder: (context, state) {
+    return Slider(
+      value: state.slider,
+      onChanged: (value) {
+        context.
+          read<SwitchBloc>().
+          add(SliderEvent(slider: value));
+        },
+    );
+  },
 )
 ```

@@ -1,13 +1,4 @@
-import 'package:bloc_flutter/bloc/counter/counter_bloc.dart';
-import 'package:bloc_flutter/bloc/switch/switch_bloc.dart';
-import 'package:bloc_flutter/ui/switch_screen.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-
-void main() {
-  runApp(const MyApp());
-}
-
+```dart
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
@@ -31,3 +22,16 @@ class MyApp extends StatelessWidget {
     );
   }
 }
+```
+
+```dart
+BlocBuilder<SwitchBloc, SwitchStates>(
+    builder: (context, state) {
+        return Switch(
+            value: state.isSwitch,
+            onChanged: (newValue) {
+                context.read<SwitchBloc>().add(EnableOrDisableNotification());
+            });
+    },
+)
+```

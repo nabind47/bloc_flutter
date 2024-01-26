@@ -1,4 +1,4 @@
-import 'package:bloc_flutter/features/posts/ui/post_page.dart';
+import 'package:bloc_flutter/ui/counter_screen.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -12,13 +12,13 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Blog',
+      title: 'Flutter Bloc',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: const PostPage(),
+      home: const CounterScreen(),
     );
   }
 }

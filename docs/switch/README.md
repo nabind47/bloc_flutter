@@ -118,3 +118,9 @@ BlocBuilder<SwitchBloc, SwitchStates>(
   },
 )
 ```
+
+```dart
+buildWhen: (previous, current) => previous.isSwitch != current.isSwitch,
+```
+
+> **_Only rebuild the widget if it is changed_**
